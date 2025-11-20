@@ -1,0 +1,125 @@
+<?php
+
+namespace App\Policies;
+
+use Illuminate\Auth\Access\Response;
+use Illuminate\Database\Eloquent\Model;
+use Maravel\Policies\BasePolicy;
+
+/**
+ * Policy avancée pour EventPolicy
+ * 
+ * Cette policy utilise le système de permissions avancé
+ * avec support des profils utilisateur et règles d'abilités.
+ */
+class EventPolicy extends BasePolicy
+{
+    /**
+     * Nom du modèle pour les permissions
+     */
+    protected $modelName = "event";
+    
+    /**
+     * Vérifications personnalisées pour viewAny
+     *
+     * @param object $connectedUser Utilisateur connecté
+     * @return Response
+     */
+    public function viewAny($connectedUser)
+    {
+        // Logique personnalisée si nécessaire
+        return parent::viewAny($connectedUser);
+    }
+
+    /**
+     * Vérifications personnalisées pour view
+     *
+     * @param object $connectedUser Utilisateur connecté
+     * @param Model $model Modèle à vérifier
+     * @return Response
+     */
+    public function view($connectedUser, Model $model)
+    {
+        // Logique personnalisée si nécessaire
+        // Exemple : vérifier que l'utilisateur peut voir ses propres données
+        // if ($model->user_id !== $connectedUser->id && !$this->isAdmin($connectedUser)) {
+        //     return Response::deny('Vous ne pouvez voir que vos propres données');
+        // }
+
+        return parent::view($connectedUser, $model);
+    }
+
+    /**
+     * Vérifications personnalisées pour create
+     *
+     * @param object $connectedUser Utilisateur connecté
+     * @return Response
+     */
+    public function create($connectedUser)
+    {
+        // Logique personnalisée si nécessaire
+        return parent::create($connectedUser);
+    }
+
+    /**
+     * Vérifications personnalisées pour update
+     *
+     * @param object $connectedUser Utilisateur connecté
+     * @param Model $model Modèle à vérifier
+     * @return Response
+     */
+    public function update($connectedUser, Model $model)
+    {
+        // Logique personnalisée si nécessaire
+        // Exemple : vérifier que l'utilisateur peut modifier ses propres données
+        // if ($model->user_id !== $connectedUser->id && !$this->isAdmin($connectedUser)) {
+        //     return Response::deny('Vous ne pouvez modifier que vos propres données');
+        // }
+
+        return parent::update($connectedUser, $model);
+    }
+
+    /**
+     * Vérifications personnalisées pour delete
+     *
+     * @param object $connectedUser Utilisateur connecté
+     * @param Model $model Modèle à vérifier
+     * @return Response
+     */
+    public function delete($connectedUser, Model $model)
+    {
+        // Logique personnalisée si nécessaire
+        // Exemple : vérifier que l'utilisateur peut supprimer ses propres données
+        // if ($model->user_id !== $connectedUser->id && !$this->isAdmin($connectedUser)) {
+        //     return Response::deny('Vous ne pouvez supprimer que vos propres données');
+        // }
+
+        return parent::delete($connectedUser, $model);
+    }
+
+    /**
+     * Vérifications personnalisées pour restore
+     *
+     * @param object $connectedUser Utilisateur connecté
+     * @param Model $model Modèle à vérifier
+     * @return Response
+     */
+    public function restore($connectedUser, Model $model)
+    {
+        // Logique personnalisée si nécessaire
+        return parent::restore($connectedUser, $model);
+    }
+
+    /**
+     * Vérifications personnalisées pour forceDelete
+     *
+     * @param object $connectedUser Utilisateur connecté
+     * @param Model $model Modèle à vérifier
+     * @return Response
+     */
+    public function forceDelete($connectedUser, Model $model)
+    {
+        // Logique personnalisée si nécessaire
+        return parent::forceDelete($connectedUser, $model);
+    }
+}
