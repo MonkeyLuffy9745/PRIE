@@ -42,7 +42,7 @@ const headers = [
   },
   {
     title: "Profil",
-    key: "profile",
+    key: "profile_fr",
   },
   {
     title: "Actions",

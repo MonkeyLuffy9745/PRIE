@@ -26,13 +26,13 @@ class UserController extends APIController
 	 * @response 200
 	 */
 	public function index(Request $request)
-    {
-        $this->indexSearchFieldList = ['first_name', 'last_name', 'email', 'mobile', 'profile'];
+	{
+		$this->indexSearchFieldList = ['first_name', 'last_name', 'email', 'mobile', 'profile'];
 		$this->indexManualFilter = function ($list, $connectedUser, $requestData) {
 			return $list;
 		};
 		return parent::index($request);
-    }
+	}
 
 	/**
 	 * Affiche un User
@@ -43,10 +43,10 @@ class UserController extends APIController
 	 * 
 	 * @response 200
 	 */
-    public function show(Request $request, $id)
-    {
+	public function show(Request $request, $id)
+	{
 		return parent::show($request, $id);
-    }
+	}
 
 	/**
 	 * Créer un nouveau User
@@ -95,15 +95,15 @@ class UserController extends APIController
 	 *
 	 * @response 200
 	 */
-    public function update(Request $request, $id)
-    {
-        $connectedUser = $request->user();
+	public function update(Request $request, $id)
+	{
+		$connectedUser = $request->user();
 		$this->updateGetValidationArrayFunction = function ($id) {
 			return [
 				'first_name' => 'required|string|max:255',
 				'last_name' => 'required|string|max:255',
 				'email' => 'required|email|unique:users,email,' . $id,
-				'password' => 'required|string|min:8',
+				'password' => 'sometimes|string|min:8',
 				'mobile' => 'required|string|max:255',
 				'profile' => 'required|string|in:admin,agent,ministry',
 			];
@@ -126,7 +126,7 @@ class UserController extends APIController
 		$this->updateRelationArray = [
 		];
 		return parent::update($request, $id);
-    }
+	}
 
 	/**
 	 * Supprime un User
@@ -135,9 +135,9 @@ class UserController extends APIController
 	 * 
 	 * @response 200
 	 */
-    public function destroy(Request $request, $id)
-    {
-        $connectedUser = $request->user();
+	public function destroy(Request $request, $id)
+	{
+		$connectedUser = $request->user();
 		$this->deleteBeforeDeleteFunction = function ($model) use ($connectedUser) {
 			return $model;
 		};
@@ -147,5 +147,5 @@ class UserController extends APIController
 		$this->updateRelationArray = [
 		];
 		return parent::destroy($request, $id);
-    }
+	}
 }

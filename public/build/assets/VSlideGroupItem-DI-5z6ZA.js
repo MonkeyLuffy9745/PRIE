@@ -1,0 +1,1 @@
+import{au as o,cn as r,cm as a}from"./main-B_3U4rnL.js";import{a as m}from"./VSlideGroup-CCtB-AAW.js";const c=o()({name:"VSlideGroupItem",props:r(),emits:{"group:selected":t=>!0},setup(t,s){let{slots:l}=s;const e=a(t,m);return()=>l.default?.({isSelected:e.isSelected.value,select:e.select,toggle:e.toggle,selectedClass:e.selectedClass.value})}});export{c as V};

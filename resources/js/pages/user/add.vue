@@ -112,6 +112,7 @@ const fieldDataList = reactive([
     type: 'text',
     label: 'Nom',
     value_key: 'first_name',
+    default_value: 'TEST',
     errors: null,
     required: true,
     cols: { cols: 12, sm: 6, md: 6, lg: 6 },
@@ -120,6 +121,16 @@ const fieldDataList = reactive([
     type: 'text',
     label: 'Prénom',
     value_key: 'last_name',
+    default_value: 'TEST',
+    errors: null,
+    required: true,
+    cols: { cols: 12, sm: 6, md: 6, lg: 6 },
+  },
+  {
+    type: 'text',
+    label: 'Email',
+    default_value: 'TEST@gmail.com',
+    value_key: 'email',
     errors: null,
     required: true,
     cols: { cols: 12, sm: 6, md: 6, lg: 6 },
@@ -128,6 +139,7 @@ const fieldDataList = reactive([
     type: 'text',
     label: 'Téléphone',
     value_key: 'mobile',
+    default_value: '91611135',
     errors: null,
     required: true,
     cols: { cols: 12, sm: 6, md: 6, lg: 6 },
@@ -138,6 +150,7 @@ const fieldDataList = reactive([
     value_key: 'profile',
     errors: null,
     required: true,
+    default_value: 'test',
     cols: { cols: 12, sm: 6, md: 6, lg: 6 },
     data: {
       list: {
@@ -161,7 +174,8 @@ const fieldDataList = reactive([
     value_key: 'password',
     errors: null,
     required: true,
-    cols: { cols: 12, sm: 12, md: 12, lg: 12 },
+    default_value: 'testtest',
+    cols: { cols: 12, sm: 6, md: 6, lg: 6 },
   },
 ]) 
 
@@ -284,8 +298,6 @@ const fileToBase64 = file => {
   return new Promise((resolve, reject) => {
     const fileReader = new FileReader()
 
-    console.log(file)
-
     // Si file est déjà un objet File (pas un événement)
     if (file instanceof File) {
       fileReader.readAsDataURL(file)
@@ -354,9 +366,10 @@ const onSubmit = () => {
           snackbarMessage.value = ""
           for (const key in res.errors) {
             if (res.errors[key]) {
-              res.errors[key].forEach(message => {
-                snackbarMessage.value += `${key}: ${message}<br>`
-              })
+              snackbarMessage.value += `${res.errors[key]}`
+              // res.errors[key].forEach(message => {
+              //   snackbarMessage.value += `${key}: ${message}<br>`
+              // })
             }
           }
           snackbarCollor.value = "error"

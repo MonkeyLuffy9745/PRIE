@@ -20,11 +20,12 @@ class User extends AuthenticatableBase
         'mobile',
         'profile',
     ];
-    
+
 
     protected $appends = [
         'ability_rules',
         'full_name',
+        'profile_fr',
     ];
     /**
      * The attributes that should be hidden for serialization.
@@ -35,7 +36,7 @@ class User extends AuthenticatableBase
         'password',
         'remember_token',
     ];
-    
+
     protected $enumCasts = [
         'profile' => ['admin' => 'Administrateur', 'agent' => 'Agent', 'ministry' => 'Ministère']
     ];
@@ -62,17 +63,27 @@ class User extends AuthenticatableBase
     }
 
 
-     public function getAbilityRulesAttribute(): array
-     {
-         return match($this->profile) {
-             'admin' => [['subject' => ['all'], 'action' => ['manage']]],
-             default => [],
-         };
-     }
- 
+    public function getAbilityRulesAttribute(): array
+    {
+        return match ($this->profile) {
+            'admin' => [['subject' => ['all'], 'action' => ['manage']]],
+            default => [],
+        };
+    }
 
-     public function getFullNameAttribute(): string
-     {
-         return "{$this->first_name} {$this->last_name}";
-     }
+    public function getFullNameAttribute(): string
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
+
+    public function getProfileFrAttribute()
+    {
+        return match ($this->profile) {
+            'admin' => 'Admin',
+            'agent' => 'Agent',
+            'ministry' => 'Ministère',
+            default => 'Inconnue',
+        };
+    }
+
 }

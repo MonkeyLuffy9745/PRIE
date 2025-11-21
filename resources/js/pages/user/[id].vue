@@ -3,40 +3,35 @@
 definePage({
   meta: {
     action: 'read',
-    subject: 'ticket-service',
+    subject: 'user',
   },
 })
 
 const router = useRouter()
-const route = useRoute('ticket-service-id')
+const route = useRoute('user-id')
 
 const {
   data: itemData,
-} = await useApi(createUrl(`/ticket-service/${route.params.id}`, {
+} = await useApi(createUrl(`/user/${route.params.id}`, {
   query: {
-    with_users: 'true',
-
-    // with_tickets: 'false', // activer si besoin côté UI
   },
 }))
 
 if (itemData.value.status !== 200) {
-  router.push({ name: 'ticket-service' })
+  router.push({ name: 'user' })
 }
 
 // Propriétés calculées pour simplifier l'accès aux données
-const item = computed(() => itemData.value.data.TicketService)
-
-const users = computed(() => item.value?.users ?? [])
-const hasUsers = computed(() => Array.isArray(users.value) && users.value.length > 0)
+const item = computed(() => itemData.value.data.User)
 
 const itemDetails = computed(() => [
-  { title: 'Nom', value: item.value?.name },
-  { title: 'Type', value: item.value?.type_fr },
-  { title: 'Membres', value: hasUsers.value ? users.value.length : 0 },
+  { title: 'Nom', value: item.value?.full_name },
+  { title: 'Email', value: item.value?.email },
+  { title: 'Téléphone', value: item.value?.mobile },
+  { title: 'Profile', value: item.value?.profile_fr },
 ])
 
-const backRoute = 'ticket-service'
+const backRoute = 'user'
 </script>
 
 <template>
@@ -51,7 +46,7 @@ const backRoute = 'ticket-service'
                   start
                   icon="tabler-arrow-left"
                 />
-                Liste des services de ticket
+                Liste des utilisateurs
               </VBtn>
             </VCol>
             <VCol
@@ -59,7 +54,7 @@ const backRoute = 'ticket-service'
               class="text-right"
             >
               <VBtn
-                :to="{ name: 'ticket-service-edit-id', params: { id: route.params.id } }"
+                :to="{ name: 'user-edit-id', params: { id: route.params.id } }"
                 color="primary"
               >
                 Modifier
@@ -91,25 +86,6 @@ const backRoute = 'ticket-service'
               </VTable>
             </VCol>
 
-            <VCol
-              v-if="hasUsers"
-              cols="12"
-            >
-              <h2>Membres :</h2>
-              <br>
-              <div class="d-flex flex-wrap gap-2">
-                <VChip
-                  v-for="u in users"
-                  :key="u.id"
-                  class="ma-1"
-                  color="primary"
-                  label
-                  variant="tonal"
-                >
-                  {{ u.name ?? ('#' + u.id) }}
-                </VChip>
-              </div>
-            </VCol>
           </VCardText>
         </VCard>
       </VCol>

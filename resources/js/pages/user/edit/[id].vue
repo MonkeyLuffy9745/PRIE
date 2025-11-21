@@ -3,31 +3,31 @@
 definePage({
   meta: {
     action: 'update',
-    subject: 'ticket-service',
+    subject: 'user',
   },
 })
 
-import { reactive, ref, nextTick, computed } from 'vue'
 import FieldRenderer from '@/components/dialogs/FieldRenderer.vue'
+import { nextTick, reactive, ref } from 'vue'
 
 const router = useRouter()
-const route = useRoute("ticket-service-edit-id")
+const route = useRoute("user-edit-id")
 
 const currentItemFech = reactive({
   api: {
-    endPoint: 'ticket-service',
-    itemName: 'TicketService',
-    query: { with_users: 'true' },
+    endPoint: 'user',
+    itemName: 'User',
+    query: {  },
   },
 })
 
 const viewData = reactive({
-  name: 'Service de ticket',
+  name: 'Utilisateurs',
   backName: 'un',
   secondBackName: 'le',
   backRoute: {
-    name: 'Services de ticket',
-    endPoint: 'ticket-service',
+    name: 'Utilisateurs',
+    endPoint: 'user',
   },
   api: {
     isLoading: false,
@@ -44,10 +44,10 @@ const currentItem = ref(currentItemData.value.data[currentItemFech.api.itemName]
 
 const functionData = {
   api: {
-    endpoint: 'ticket-service',
+    endpoint: 'user',
     method: 'PUT',
   },
-  backRouteName: 'ticket-service',
+  backRouteName: 'user',
 }
 
 function resetErrors() {
@@ -60,32 +60,46 @@ const fieldDataList = reactive([
   {
     type: 'text',
     label: 'Nom',
-    valueKey: 'name',
+    value_key: 'first_name',
+    default_value: 'TEST',
     errors: null,
     required: true,
     cols: { cols: 12, sm: 6, md: 6, lg: 6 },
-    data: {
-      list: {
-        id: 'id',
-        name: 'name',
-        source: 'array',
-        api: {
-          endpoint: "",
-          query: {},
-          execute: null,
-          data: null,
-        },
-        items: [],
-        multiple: false,
-      },
-    },
+  },
+  {
+    type: 'text',
+    label: 'Prénom',
+    value_key: 'last_name',
+    default_value: 'TEST',
+    errors: null,
+    required: true,
+    cols: { cols: 12, sm: 6, md: 6, lg: 6 },
+  },
+  {
+    type: 'text',
+    label: 'Email',
+    default_value: 'TEST@gmail.com',
+    value_key: 'email',
+    errors: null,
+    required: true,
+    cols: { cols: 12, sm: 6, md: 6, lg: 6 },
+  },
+  {
+    type: 'text',
+    label: 'Téléphone',
+    value_key: 'mobile',
+    default_value: '91611135',
+    errors: null,
+    required: true,
+    cols: { cols: 12, sm: 6, md: 6, lg: 6 },
   },
   {
     type: 'lov',
-    label: 'Type',
-    valueKey: 'type',
+    label: 'Profil',
+    value_key: 'profile',
     errors: null,
     required: true,
+    default_value: 'test',
     cols: { cols: 12, sm: 6, md: 6, lg: 6 },
     data: {
       list: {
@@ -98,33 +112,19 @@ const fieldDataList = reactive([
           execute: null,
           data: null,
         },
-        items: [{ id: 'it', name: 'It' }, { id: 'ops', name: 'Opérations' }],
+        items: [{ id: 'admin', name: 'Administrateur' }, { id: 'agent', name: 'Agent' }, { id: 'ministry', name: 'Ministère' }],
         multiple: false,
       },
     },
   },
   {
-    type: 'lov',
-    label: 'Utilisateurs',
-    valueKey: 'users',
+    type: 'text',
+    label: 'Mot de passe',
+    value_key: 'password',
     errors: null,
     required: false,
-    cols: { cols: 12, sm: 12, md: 12, lg: 12 },
-    data: {
-      list: {
-        id: 'id',
-        name: 'name',
-        source: 'api',
-        api: {
-          endpoint: 'user',
-          query: { paginate: 'false' },
-          execute: null,
-          data: null,
-        },
-        items: [],
-        multiple: true,
-      },
-    },
+    default_value: 'testtest',
+    cols: { cols: 12, sm: 6, md: 6, lg: 6 },
   },
 ])
 
@@ -172,16 +172,17 @@ const onSubmit = () => {
         router.push({ name: functionData.backRouteName })
       } else if (res?.errors) {
         fieldDataList.forEach(item => {
-          if (res.errors[item.valueKey]) {
-            item.errors = res.errors[item.valueKey]
+          if (res.errors[item.value_key]) {
+            item.errors = res.errors[item.value_key]
           }
         })
         snackbarMessage.value = ''
         for (const key in res.errors) {
           if (res.errors[key]) {
-            res.errors[key].forEach(message => {
-              snackbarMessage.value += `${key}: ${message}<br>`
-            })
+            snackbarMessage.value += `${res.errors[key]}`
+            // res.errors[key].forEach(message => {
+            //   snackbarMessage.value += `${key}: ${message}<br>`
+            // })
           }
         }
         snackbarCollor.value = 'error'
@@ -238,14 +239,14 @@ const snackbarCollor = ref("success")
               <VRow>
                 <VCol
                   v-for="field in fieldDataList"
-                  :key="field.valueKey"
+                  :key="field.value_key"
                   :cols="field.cols.cols??12"
                   :sm="field.cols.sm??12"
                   :md="field.cols.md??12"
                   :lg="field.cols.lg??12"
                 >
                   <FieldRenderer
-                    v-model="currentItem[field.valueKey]"
+                    v-model="currentItem[field.value_key]"
                     :field="field"
                   />
                 </VCol>
