@@ -10,6 +10,11 @@ export default [
     ],
   },
   {
+    title: 'Localisations',
+    icon: { icon: 'tabler-brand-google-maps' },
+    to: 'location',
+  },
+  {
     title: 'Users',
     icon: { icon: 'tabler-users' },
     to: 'user',

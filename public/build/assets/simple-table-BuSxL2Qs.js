@@ -1,0 +1,889 @@
+import{V as u}from"./VTable-BOBjG7xY.js";import{f as c,o,e as s,d as t,c as m,F as f,h as g,t as r,b as a,l as h,s as n}from"./main-B6snbbeR.js";import{_ as F}from"./AppCardCode-B87-U3v-.js";import{V as w,a as b}from"./VRow-B2681vdV.js";import{V as _}from"./VCardText-BSdQ4zK2.js";import"./vue3-perfect-scrollbar-DtQxLb6n.js";import"./VCard-HETOwAdS.js";import"./VAvatar-DkcJ3saq.js";import"./VDivider-BP2GefMD.js";const x={__name:"DemoSimpleTableFixedHeader",setup(p){const l=[{dessert:"Frozen Yogurt",calories:159,fat:6,carbs:24,protein:4},{dessert:"Ice cream sandwich",calories:237,fat:6,carbs:24,protein:4},{dessert:"Eclair",calories:262,fat:6,carbs:24,protein:4},{dessert:"Cupcake",calories:305,fat:6,carbs:24,protein:4},{dessert:"Gingerbread",calories:356,fat:6,carbs:24,protein:4}];return(d,i)=>(o(),c(u,{height:"250","fixed-header":"",class:"text-no-wrap"},{default:s(()=>[i[0]||(i[0]=t("thead",null,[t("tr",null,[t("th",null," Desserts(100g Servings) "),t("th",null," calories "),t("th",null," Fat(g) "),t("th",null," Carbs(g) "),t("th",null," protein(g) ")])],-1)),t("tbody",null,[(o(),m(f,null,g(l,e=>t("tr",{key:e.dessert},[t("td",null,r(e.dessert),1),t("td",null,r(e.calories),1),t("td",null,r(e.fat),1),t("td",null,r(e.carbs),1),t("td",null,r(e.protein),1)])),64))])]),_:1}))}},V={__name:"DemoSimpleTableHeight",setup(p){const l=[{dessert:"Frozen Yogurt",calories:159,fat:6,carbs:24,protein:4},{dessert:"Ice cream sandwich",calories:237,fat:6,carbs:24,protein:4},{dessert:"Eclair",calories:262,fat:6,carbs:24,protein:4},{dessert:"Cupcake",calories:305,fat:6,carbs:24,protein:4},{dessert:"Gingerbread",calories:356,fat:6,carbs:24,protein:4}];return(d,i)=>(o(),c(u,{height:"250",class:"text-no-wrap"},{default:s(()=>[i[0]||(i[0]=t("thead",null,[t("tr",null,[t("th",null," Desserts(100g Servings) "),t("th",null," calories "),t("th",null," Fat(g) "),t("th",null," Carbs(g) "),t("th",null," protein(g) ")])],-1)),t("tbody",null,[(o(),m(f,null,g(l,e=>t("tr",{key:e.dessert},[t("td",null,r(e.dessert),1),t("td",null,r(e.calories),1),t("td",null,r(e.fat),1),t("td",null,r(e.carbs),1),t("td",null,r(e.protein),1)])),64))])]),_:1}))}},D={__name:"DemoSimpleTableDensity",setup(p){const l=[{dessert:"Frozen Yogurt",calories:159,fat:6,carbs:24,protein:4},{dessert:"Ice cream sandwich",calories:237,fat:6,carbs:24,protein:4},{dessert:"Eclair",calories:262,fat:6,carbs:24,protein:4},{dessert:"Cupcake",calories:305,fat:6,carbs:24,protein:4},{dessert:"Gingerbread",calories:356,fat:6,carbs:24,protein:4}];return(d,i)=>(o(),c(u,{density:"compact",class:"text-no-wrap"},{default:s(()=>[i[0]||(i[0]=t("thead",null,[t("tr",null,[t("th",null," Desserts(100g Servings) "),t("th",null," calories "),t("th",null," Fat(g) "),t("th",null," Carbs(g) "),t("th",null," protein(g) ")])],-1)),t("tbody",null,[(o(),m(f,null,g(l,e=>t("tr",{key:e.dessert},[t("td",null,r(e.dessert),1),t("td",null,r(e.calories),1),t("td",null,r(e.fat),1),t("td",null,r(e.carbs),1),t("td",null,r(e.protein),1)])),64))])]),_:1}))}},v={__name:"DemoSimpleTableTheme",setup(p){const l=[{dessert:"Frozen Yogurt",calories:159,fat:6,carbs:24,protein:4},{dessert:"Ice cream sandwich",calories:237,fat:6,carbs:24,protein:4},{dessert:"Eclair",calories:262,fat:6,carbs:24,protein:4},{dessert:"Cupcake",calories:305,fat:6,carbs:24,protein:4},{dessert:"Gingerbread",calories:356,fat:6,carbs:24,protein:4}];return(d,i)=>(o(),c(u,{theme:"dark",class:"text-no-wrap rounded-0"},{default:s(()=>[i[0]||(i[0]=t("thead",null,[t("tr",null,[t("th",null," Desserts(100g Servings) "),t("th",null," calories "),t("th",null," Fat(g) "),t("th",null," Carbs(g) "),t("th",null," protein(g) ")])],-1)),t("tbody",null,[(o(),m(f,null,g(l,e=>t("tr",{key:e.dessert},[t("td",null,r(e.dessert),1),t("td",null,r(e.calories),1),t("td",null,r(e.fat),1),t("td",null,r(e.carbs),1),t("td",null,r(e.protein),1)])),64))])]),_:1}))}},S={__name:"DemoSimpleTableBasic",setup(p){const l=[{dessert:"Frozen Yogurt",calories:159,fat:6,carbs:24,protein:4},{dessert:"Ice cream sandwich",calories:237,fat:6,carbs:24,protein:4},{dessert:"Eclair",calories:262,fat:6,carbs:24,protein:4},{dessert:"Cupcake",calories:305,fat:6,carbs:24,protein:4},{dessert:"Gingerbread",calories:356,fat:6,carbs:24,protein:4}];return(d,i)=>(o(),c(u,{class:"text-no-wrap"},{default:s(()=>[i[0]||(i[0]=t("thead",null,[t("tr",null,[t("th",null," Desserts(100g Servings) "),t("th",null," calories "),t("th",null," Fat(g) "),t("th",null," Carbs(g) "),t("th",null," protein(g) ")])],-1)),t("tbody",null,[(o(),m(f,null,g(l,e=>t("tr",{key:e.dessert},[t("td",null,r(e.dessert),1),t("td",null,r(e.calories),1),t("td",null,r(e.fat),1),t("td",null,r(e.carbs),1),t("td",null,r(e.protein),1)])),64))])]),_:1}))}},Y={ts:`<script setup lang="ts">
+const desserts = [
+  {
+    dessert: 'Frozen Yogurt',
+    calories: 159,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Ice cream sandwich',
+    calories: 237,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Eclair',
+    calories: 262,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Cupcake',
+    calories: 305,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Gingerbread',
+    calories: 356,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+]
+<\/script>
+
+<template>
+  <VTable class="text-no-wrap">
+    <thead>
+      <tr>
+        <th>
+          Desserts(100g Servings)
+        </th>
+        <th>
+          calories
+        </th>
+        <th>
+          Fat(g)
+        </th>
+        <th>
+          Carbs(g)
+        </th>
+        <th>
+          protein(g)
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr
+        v-for="item in desserts"
+        :key="item.dessert"
+      >
+        <td>
+          {{ item.dessert }}
+        </td>
+        <td>
+          {{ item.calories }}
+        </td>
+        <td>
+          {{ item.fat }}
+        </td>
+        <td>
+          {{ item.carbs }}
+        </td>
+        <td>
+          {{ item.protein }}
+        </td>
+      </tr>
+    </tbody>
+  </VTable>
+</template>
+`,js:`<script setup>
+const desserts = [
+  {
+    dessert: 'Frozen Yogurt',
+    calories: 159,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Ice cream sandwich',
+    calories: 237,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Eclair',
+    calories: 262,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Cupcake',
+    calories: 305,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Gingerbread',
+    calories: 356,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+]
+<\/script>
+
+<template>
+  <VTable class="text-no-wrap">
+    <thead>
+      <tr>
+        <th>
+          Desserts(100g Servings)
+        </th>
+        <th>
+          calories
+        </th>
+        <th>
+          Fat(g)
+        </th>
+        <th>
+          Carbs(g)
+        </th>
+        <th>
+          protein(g)
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr
+        v-for="item in desserts"
+        :key="item.dessert"
+      >
+        <td>
+          {{ item.dessert }}
+        </td>
+        <td>
+          {{ item.calories }}
+        </td>
+        <td>
+          {{ item.fat }}
+        </td>
+        <td>
+          {{ item.carbs }}
+        </td>
+        <td>
+          {{ item.protein }}
+        </td>
+      </tr>
+    </tbody>
+  </VTable>
+</template>
+`},E={ts:`<script setup lang="ts">
+const desserts = [
+  {
+    dessert: 'Frozen Yogurt',
+    calories: 159,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Ice cream sandwich',
+    calories: 237,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Eclair',
+    calories: 262,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Cupcake',
+    calories: 305,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Gingerbread',
+    calories: 356,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+]
+<\/script>
+
+<template>
+  <VTable
+    density="compact"
+    class="text-no-wrap"
+  >
+    <thead>
+      <tr>
+        <th>
+          Desserts(100g Servings)
+        </th>
+        <th>
+          calories
+        </th>
+        <th>
+          Fat(g)
+        </th>
+        <th>
+          Carbs(g)
+        </th>
+        <th>
+          protein(g)
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr
+        v-for="item in desserts"
+        :key="item.dessert"
+      >
+        <td>
+          {{ item.dessert }}
+        </td>
+        <td>
+          {{ item.calories }}
+        </td>
+        <td>
+          {{ item.fat }}
+        </td>
+        <td>
+          {{ item.carbs }}
+        </td>
+        <td>
+          {{ item.protein }}
+        </td>
+      </tr>
+    </tbody>
+  </VTable>
+</template>
+`,js:`<script setup>
+const desserts = [
+  {
+    dessert: 'Frozen Yogurt',
+    calories: 159,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Ice cream sandwich',
+    calories: 237,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Eclair',
+    calories: 262,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Cupcake',
+    calories: 305,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Gingerbread',
+    calories: 356,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+]
+<\/script>
+
+<template>
+  <VTable
+    density="compact"
+    class="text-no-wrap"
+  >
+    <thead>
+      <tr>
+        <th>
+          Desserts(100g Servings)
+        </th>
+        <th>
+          calories
+        </th>
+        <th>
+          Fat(g)
+        </th>
+        <th>
+          Carbs(g)
+        </th>
+        <th>
+          protein(g)
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr
+        v-for="item in desserts"
+        :key="item.dessert"
+      >
+        <td>
+          {{ item.dessert }}
+        </td>
+        <td>
+          {{ item.calories }}
+        </td>
+        <td>
+          {{ item.fat }}
+        </td>
+        <td>
+          {{ item.carbs }}
+        </td>
+        <td>
+          {{ item.protein }}
+        </td>
+      </tr>
+    </tbody>
+  </VTable>
+</template>
+`},z={ts:`<script setup lang="ts">
+const desserts = [
+  {
+    dessert: 'Frozen Yogurt',
+    calories: 159,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Ice cream sandwich',
+    calories: 237,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Eclair',
+    calories: 262,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Cupcake',
+    calories: 305,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Gingerbread',
+    calories: 356,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+]
+<\/script>
+
+<template>
+  <VTable
+    height="250"
+    fixed-header
+    class="text-no-wrap"
+  >
+    <thead>
+      <tr>
+        <th>
+          Desserts(100g Servings)
+        </th>
+        <th>
+          calories
+        </th>
+        <th>
+          Fat(g)
+        </th>
+        <th>
+          Carbs(g)
+        </th>
+        <th>
+          protein(g)
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr
+        v-for="item in desserts"
+        :key="item.dessert"
+      >
+        <td>
+          {{ item.dessert }}
+        </td>
+        <td>
+          {{ item.calories }}
+        </td>
+        <td>
+          {{ item.fat }}
+        </td>
+        <td>
+          {{ item.carbs }}
+        </td>
+        <td>
+          {{ item.protein }}
+        </td>
+      </tr>
+    </tbody>
+  </VTable>
+</template>
+`,js:`<script setup>
+const desserts = [
+  {
+    dessert: 'Frozen Yogurt',
+    calories: 159,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Ice cream sandwich',
+    calories: 237,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Eclair',
+    calories: 262,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Cupcake',
+    calories: 305,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Gingerbread',
+    calories: 356,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+]
+<\/script>
+
+<template>
+  <VTable
+    height="250"
+    fixed-header
+    class="text-no-wrap"
+  >
+    <thead>
+      <tr>
+        <th>
+          Desserts(100g Servings)
+        </th>
+        <th>
+          calories
+        </th>
+        <th>
+          Fat(g)
+        </th>
+        <th>
+          Carbs(g)
+        </th>
+        <th>
+          protein(g)
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr
+        v-for="item in desserts"
+        :key="item.dessert"
+      >
+        <td>
+          {{ item.dessert }}
+        </td>
+        <td>
+          {{ item.calories }}
+        </td>
+        <td>
+          {{ item.fat }}
+        </td>
+        <td>
+          {{ item.carbs }}
+        </td>
+        <td>
+          {{ item.protein }}
+        </td>
+      </tr>
+    </tbody>
+  </VTable>
+</template>
+`},G={ts:`<script setup lang="ts">
+const desserts = [
+  {
+    dessert: 'Frozen Yogurt',
+    calories: 159,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Ice cream sandwich',
+    calories: 237,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Eclair',
+    calories: 262,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Cupcake',
+    calories: 305,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Gingerbread',
+    calories: 356,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+]
+<\/script>
+
+<template>
+  <VTable
+    height="250"
+    class="text-no-wrap"
+  >
+    <thead>
+      <tr>
+        <th>
+          Desserts(100g Servings)
+        </th>
+        <th>
+          calories
+        </th>
+        <th>
+          Fat(g)
+        </th>
+        <th>
+          Carbs(g)
+        </th>
+        <th>
+          protein(g)
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr
+        v-for="item in desserts"
+        :key="item.dessert"
+      >
+        <td>
+          {{ item.dessert }}
+        </td>
+        <td>
+          {{ item.calories }}
+        </td>
+        <td>
+          {{ item.fat }}
+        </td>
+        <td>
+          {{ item.carbs }}
+        </td>
+        <td>
+          {{ item.protein }}
+        </td>
+      </tr>
+    </tbody>
+  </VTable>
+</template>
+`,js:`<script setup>
+const desserts = [
+  {
+    dessert: 'Frozen Yogurt',
+    calories: 159,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Ice cream sandwich',
+    calories: 237,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Eclair',
+    calories: 262,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Cupcake',
+    calories: 305,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Gingerbread',
+    calories: 356,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+]
+<\/script>
+
+<template>
+  <VTable
+    height="250"
+    class="text-no-wrap"
+  >
+    <thead>
+      <tr>
+        <th>
+          Desserts(100g Servings)
+        </th>
+        <th>
+          calories
+        </th>
+        <th>
+          Fat(g)
+        </th>
+        <th>
+          Carbs(g)
+        </th>
+        <th>
+          protein(g)
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr
+        v-for="item in desserts"
+        :key="item.dessert"
+      >
+        <td>
+          {{ item.dessert }}
+        </td>
+        <td>
+          {{ item.calories }}
+        </td>
+        <td>
+          {{ item.fat }}
+        </td>
+        <td>
+          {{ item.carbs }}
+        </td>
+        <td>
+          {{ item.protein }}
+        </td>
+      </tr>
+    </tbody>
+  </VTable>
+</template>
+`},I={ts:`<script setup lang="ts">
+const desserts = [
+  {
+    dessert: 'Frozen Yogurt',
+    calories: 159,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Ice cream sandwich',
+    calories: 237,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Eclair',
+    calories: 262,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Cupcake',
+    calories: 305,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Gingerbread',
+    calories: 356,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+]
+<\/script>
+
+<template>
+  <VTable
+
+    theme="dark"
+    class="text-no-wrap rounded-0"
+  >
+    <thead>
+      <tr>
+        <th>
+          Desserts(100g Servings)
+        </th>
+        <th>
+          calories
+        </th>
+        <th>
+          Fat(g)
+        </th>
+        <th>
+          Carbs(g)
+        </th>
+        <th>
+          protein(g)
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr
+        v-for="item in desserts"
+        :key="item.dessert"
+      >
+        <td>
+          {{ item.dessert }}
+        </td>
+        <td>
+          {{ item.calories }}
+        </td>
+        <td>
+          {{ item.fat }}
+        </td>
+        <td>
+          {{ item.carbs }}
+        </td>
+        <td>
+          {{ item.protein }}
+        </td>
+      </tr>
+    </tbody>
+  </VTable>
+</template>
+`,js:`<script setup>
+const desserts = [
+  {
+    dessert: 'Frozen Yogurt',
+    calories: 159,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Ice cream sandwich',
+    calories: 237,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Eclair',
+    calories: 262,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Cupcake',
+    calories: 305,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+  {
+    dessert: 'Gingerbread',
+    calories: 356,
+    fat: 6,
+    carbs: 24,
+    protein: 4,
+  },
+]
+<\/script>
+
+<template>
+  <VTable
+
+    theme="dark"
+    class="text-no-wrap rounded-0"
+  >
+    <thead>
+      <tr>
+        <th>
+          Desserts(100g Servings)
+        </th>
+        <th>
+          calories
+        </th>
+        <th>
+          Fat(g)
+        </th>
+        <th>
+          Carbs(g)
+        </th>
+        <th>
+          protein(g)
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr
+        v-for="item in desserts"
+        :key="item.dessert"
+      >
+        <td>
+          {{ item.dessert }}
+        </td>
+        <td>
+          {{ item.calories }}
+        </td>
+        <td>
+          {{ item.fat }}
+        </td>
+        <td>
+          {{ item.carbs }}
+        </td>
+        <td>
+          {{ item.protein }}
+        </td>
+      </tr>
+    </tbody>
+  </VTable>
+</template>
+`},J={__name:"simple-table",setup(p){return(l,d)=>{const i=S,e=F,y=v,k=D,T=V,C=x;return o(),c(w,null,{default:s(()=>[a(b,{cols:"12"},{default:s(()=>[a(e,{title:"Basic",code:h(Y),"no-padding":""},{default:s(()=>[a(i)]),_:1},8,["code"])]),_:1}),a(b,{cols:"12"},{default:s(()=>[a(e,{title:"Theme",code:h(I),"no-padding":""},{default:s(()=>[a(_,null,{default:s(()=>[...d[0]||(d[0]=[n(" use ",-1),t("code",null,"theme",-1),n(" prop to switch table to the dark theme. ",-1)])]),_:1}),a(y)]),_:1},8,["code"])]),_:1}),a(b,{cols:"12"},{default:s(()=>[a(e,{title:"Density",code:h(E),"no-padding":""},{default:s(()=>[a(_,null,{default:s(()=>[...d[1]||(d[1]=[n(" You can show a dense version of the table by using the ",-1),t("code",null,"density",-1),n(" prop. ",-1)])]),_:1}),a(k)]),_:1},8,["code"])]),_:1}),a(b,{cols:"12"},{default:s(()=>[a(e,{title:"Height",code:h(G),"no-padding":""},{default:s(()=>[a(_,null,{default:s(()=>[...d[2]||(d[2]=[n(" You can set the height of the table by using the ",-1),t("code",null,"height",-1),n(" prop. ",-1)])]),_:1}),a(T)]),_:1},8,["code"])]),_:1}),a(b,{cols:"12"},{default:s(()=>[a(e,{title:"Fixed Header",code:h(z),"no-padding":""},{default:s(()=>[a(_,null,{default:s(()=>[...d[3]||(d[3]=[n(" You can fix the header of table by using the ",-1),t("code",null,"fixed-header",-1),n(" prop. ",-1)])]),_:1}),a(C)]),_:1},8,["code"])]),_:1})]),_:1})}}};export{J as default};

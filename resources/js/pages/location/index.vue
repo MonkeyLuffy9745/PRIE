@@ -2,7 +2,7 @@
 definePage({
   meta: {
     action: "read",
-    subject: "user",
+    subject: "location",
   },
 })
 
@@ -30,19 +30,15 @@ const userData = useCookie("userData")
 const headers = [
   {
     title: "Nom",
-    key: "full_name",
+    key: "name",
   },
   {
-    title: "Email",
-    key: "email",
+    title: "Niveau",
+    key: "level_fr",
   },
   {
-    title: "Téléphone",
-    key: "mobile",
-  },
-  {
-    title: "Profil",
-    key: "profile_fr",
+    title: "Parent",
+    key: "parent.name",
   },
   {
     title: "Actions",
@@ -59,27 +55,27 @@ const viewData = reactive({
   },
   data: {
     title: {
-      singular: "Utilisateur",
-      plural: "Utilisateurs",
+      singular: "Localisation",
+      plural: "Localisations",
     },
     actions: {
-      singular: "l'utilisateur",
-      plural: "les utilisateurs",
+      singular: "la localisation",
+      plural: "les localisations",
     },
     rule: {
-      name: "user",
+      name: "location",
     },
     link: {
-      base: "user",
+      base: "location",
     },
     api: {
-      endPoint: "user",
+      endPoint: "location",
       data: null,
       query: {
         // status: 'awaiting_support',
         // type: 'it',
         // with_initiator: 'true',
-        // with_user_service: 'true',
+        // with_location_service: 'true',
         // order_order_by_desc: 'created_at'
       },
     },
@@ -102,7 +98,7 @@ const filterDataArray = reactive([
     base: {
       name: "Type",
       dataSource: "array",
-      apiEndpoint: "user",
+      apiEndpoint: "location",
       query: { paginate: "false" },
     },
     filter: {
@@ -111,9 +107,8 @@ const filterDataArray = reactive([
     },
     api: {
       datac: [
-        { id: "admin", name: "Administrateur" },
-        { id: "agent", name: "Agent" },
-        { id: "ministry", name: "Ministère" },
+        { id: "region", name: "Région" },
+        { id: "prefecture", name: "Préfecture" },
       ],
     },
   },
@@ -137,7 +132,7 @@ for (let index = 0; index < filterDataArray.length; index++) {
   }
 }
 
-// Nouvelle structure pour les données des services de user
+// Nouvelle structure pour les données des services de location
 const itemListData = ref({ data: [], total: 0, lastPage: 1 })
 
 const fetchItemList = async (idList = []) => {
@@ -310,7 +305,7 @@ watchEffect(async () => {
           <div class="text-end">
             <div>
               <IconBtn
-                v-if="$can('read', 'user')"
+                v-if="$can('read', 'location')"
                 :to="{
                   name: `${viewData.data.link.base}-id`,
                   params: { id: item.id },
@@ -326,7 +321,7 @@ watchEffect(async () => {
                 <VIcon icon="tabler-eye" />
               </IconBtn>
               <IconBtn
-                v-if="$can('edit', 'user')"
+                v-if="$can('edit', 'location')"
                 :to="{
                   name: `${viewData.data.link.base}-edit-id`,
                   params: { id: item.id },
@@ -342,7 +337,7 @@ watchEffect(async () => {
                 <VIcon icon="tabler-edit" />
               </IconBtn>
               <IconBtn
-                v-if="$can('delete', 'user')"
+                v-if="$can('delete', 'location')"
                 :loading="deleteLoadings[item.id]"
                 :disabled="deleteLoadings[item.id]"
                 @click="
