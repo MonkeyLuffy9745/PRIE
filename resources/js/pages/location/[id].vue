@@ -3,35 +3,35 @@
 definePage({
   meta: {
     action: 'read',
-    subject: 'user',
+    subject: 'location',
   },
 })
 
 const router = useRouter()
-const route = useRoute('user-id')
+const route = useRoute('location-id')
 
 const {
   data: itemData,
-} = await useApi(createUrl(`/user/${route.params.id}`, {
+} = await useApi(createUrl(`/location/${route.params.id}`, {
   query: {
+    with_parent: 'true',
   },
 }))
 
 if (itemData.value.status !== 200) {
-  router.push({ name: 'user' })
+  router.push({ name: 'location' })
 }
 
 // Propriétés calculées pour simplifier l'accès aux données
-const item = computed(() => itemData.value.data.User)
+const item = computed(() => itemData.value.data.Location)
 
 const itemDetails = computed(() => [
-  { title: 'Nom', value: item.value?.full_name },
-  { title: 'Email', value: item.value?.email },
-  { title: 'Téléphone', value: item.value?.mobile },
-  { title: 'Profile', value: item.value?.profile_fr },
+  { title: 'Nom', value: item.value?.name },
+  { title: 'Niveau', value: item.value?.level_fr },
+  { title: 'Parent', value: item.value?.parent?.name },
 ])
 
-const backRoute = 'user'
+const backRoute = 'location'
 </script>
 
 <template>
@@ -46,7 +46,7 @@ const backRoute = 'user'
                   start
                   icon="tabler-arrow-left"
                 />
-                Liste des utilisateurs
+                Liste des localisations
               </VBtn>
             </VCol>
             <VCol
@@ -54,7 +54,7 @@ const backRoute = 'user'
               class="text-right"
             >
               <VBtn
-                :to="{ name: 'user-edit-id', params: { id: route.params.id } }"
+                :to="{ name: 'location-edit-id', params: { id: route.params.id } }"
                 color="primary"
               >
                 Modifier

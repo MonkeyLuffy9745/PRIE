@@ -3,7 +3,7 @@
 definePage({
   meta: {
     action: 'create',
-    subject: 'user',
+    subject: 'location',
   },
 })
 
@@ -14,10 +14,10 @@ const router = useRouter()
 
 const functionData = {
   api: {
-    endpoint: 'user',
+    endpoint: 'location',
     method: 'POST',
   },
-  back_route_name: 'user',
+  back_route_name: 'location',
 }
 
 // Configuration des messages de succès/erreur
@@ -90,9 +90,9 @@ const getFieldSpecificErrors = (field, errors) => {
 }
 
 const viewData = reactive({
-  name: 'Utilisateur',
-  back_name: 'un',
-  second_back_name: 'utilisateur',
+  name: 'Localisation',
+  back_name: 'une',
+  second_back_name: 'localisation',
   api: {
     is_loading: false,
   },
@@ -111,47 +111,20 @@ const fieldDataList = reactive([
   {
     type: 'text',
     label: 'Nom',
-    value_key: 'first_name',
+    value_key: 'name',
     default_value: 'TEST',
     errors: null,
     required: true,
-    cols: { cols: 12, sm: 6, md: 6, lg: 6 },
-  },
-  {
-    type: 'text',
-    label: 'Prénom',
-    value_key: 'last_name',
-    default_value: 'TEST',
-    errors: null,
-    required: true,
-    cols: { cols: 12, sm: 6, md: 6, lg: 6 },
-  },
-  {
-    type: 'text',
-    label: 'Email',
-    default_value: 'TEST@gmail.com',
-    value_key: 'email',
-    errors: null,
-    required: true,
-    cols: { cols: 12, sm: 6, md: 6, lg: 6 },
-  },
-  {
-    type: 'text',
-    label: 'Téléphone',
-    value_key: 'mobile',
-    default_value: '91611135',
-    errors: null,
-    required: true,
-    cols: { cols: 12, sm: 6, md: 6, lg: 6 },
+    cols: { cols: 12, sm: 12, md: 12, lg: 12 },
   },
   {
     type: 'lov',
-    label: 'Profil',
-    value_key: 'profile',
+    label: 'Niveau',
+    value_key: 'level',
     errors: null,
     required: true,
-    default_value: 'test',
-    cols: { cols: 12, sm: 6, md: 6, lg: 6 },
+    default_value: 'region',
+    cols: { cols: 12, sm: 12, md: 12, lg: 12 },
     data: {
       list: {
         id: 'id',
@@ -163,19 +136,35 @@ const fieldDataList = reactive([
           execute: null,
           data: null,
         },
-        items: [{ id: 'admin', name: 'Administrateur' }, { id: 'agent', name: 'Agent' }, { id: 'ministry', name: 'Ministère' }],
+        items: [{ id: 'region', name: 'Région' }, { id: 'prefecture', name: 'Préfecture' }],
         multiple: false,
       },
     },
   },
   {
-    type: 'text',
-    label: 'Mot de passe',
-    value_key: 'password',
+    type: 'lov',
+    label: 'Parent',
+    value_key: 'parent_id',
     errors: null,
-    required: true,
-    default_value: 'testtest',
-    cols: { cols: 12, sm: 6, md: 6, lg: 6 },
+    required: false,
+    default_value: null,
+    clearable: true,
+    cols: { cols: 12, sm: 12, md: 12, lg: 12 },
+    data: {
+      list: {
+        id: 'id',
+        name: 'name',
+        source: 'api',
+        api: {
+          endpoint: 'location',
+          query: {},
+          execute: null,
+          data: null,
+        },
+        items: [],
+        multiple: false,
+      },
+    },
   },
 ]) 
 
@@ -367,6 +356,7 @@ const onSubmit = () => {
           for (const key in res.errors) {
             if (res.errors[key]) {
               snackbarMessage.value += `${res.errors[key]}`
+
               // res.errors[key].forEach(message => {
               //   snackbarMessage.value += `${key}: ${message}<br>`
               // })

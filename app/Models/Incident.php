@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Maravel\Models\ModelBase;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Modèle Incident
@@ -34,11 +35,9 @@ class Incident extends ModelBase
 		'title',
 		'occurred_at',
 		'location_id',
-		'place_description',
+		'description',
 		'people_involved',
-		'circumstances',
 		'actions_taken',
-		'proposed_solutions',
 		'user_id',
 	];
 
@@ -68,7 +67,7 @@ class Incident extends ModelBase
 	 */
 	protected $dateCasts = [
 		// Exemple: 'published_at' => 'd/m/Y H:i'
-		'occurred_at' => 'd/m/Y H:i',
+		'occurred_at' => 'd/m/Y',
 	];
 
 	/**
@@ -103,6 +102,7 @@ class Incident extends ModelBase
 		//     'published' => 'Publié',
 		//     'archived' => 'Archivé',
 		// ],
+
 	];
 
 	public function user(): BelongsTo

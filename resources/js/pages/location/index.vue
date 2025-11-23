@@ -114,7 +114,9 @@ const filterDataArray = reactive([
   },
 ])
 
-const moreQuery = {}
+const moreQuery = {
+  'with_parent': 'true',
+}
 
 for (let index = 0; index < filterDataArray.length; index++) {
   if (filterDataArray[index]["base"]["data_source"] === "api") {

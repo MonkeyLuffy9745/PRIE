@@ -28,7 +28,7 @@ class IncidentController extends APIController
 	public function index(Request $request)
     {
         $this->indexSearchFieldList = ['title',
-		'place_description',
+		'description',
 		'people_involved',
 		'circumstances',
 		'actions_taken',
@@ -68,16 +68,15 @@ class IncidentController extends APIController
 			'title' => 'required|string|max:255',
 			'occurred_at' => 'required|date',
 			'location_id' => 'required|exists:locations,id',
-			'place_description' => 'nullable|string',
+			'description' => 'nullable|string',
 			'people_involved' => 'nullable|string',
-			'circumstances' => 'nullable|string',
 			'actions_taken' => 'nullable|string',
-			'proposed_solutions' => 'nullable|string',
 		];
 		$this->storeManualValidationsFunction = function ($requestData) use ($connectedUser) {
 			return null;
 		};
 		$this->storeBeforeCreateFunction = function ($requestData) use ($connectedUser) {
+			$requestData['user_id'] = $connectedUser->id;
 			return $requestData;
 		};
 		$this->storeAfterCreateFunction = function ($model, $requestData, $data) use ($connectedUser) {
@@ -111,11 +110,9 @@ class IncidentController extends APIController
 				'title' => 'required|string|max:255',
 				'occurred_at' => 'required|date',
 				'location_id' => 'required|exists:locations,id',
-				'place_description' => 'nullable|string',
+				'description' => 'nullable|string',
 				'people_involved' => 'nullable|string',
-				'circumstances' => 'nullable|string',
 				'actions_taken' => 'nullable|string',
-				'proposed_solutions' => 'nullable|string',
 			];
 		};
 		$this->updateManualValidationsFunction = function ($requestData, $model) use ($connectedUser) {

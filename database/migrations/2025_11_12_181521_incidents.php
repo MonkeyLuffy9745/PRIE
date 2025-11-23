@@ -19,14 +19,11 @@ return new class extends Migration
 
 			$table->foreignId('location_id')->nullable()->constrained('locations')->nullOnDelete();
 
-			$table->text('place_description')->nullable();
+			$table->text('description')->nullable();
 			$table->text('people_involved')->nullable();
-			$table->text('circumstances')->nullable();
 			$table->text('actions_taken')->nullable();
-			$table->text('proposed_solutions')->nullable();
 
 			$table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-			$table->softDeletes();
 			$table->timestamps();
 		});
     }

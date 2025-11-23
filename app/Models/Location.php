@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Maravel\Models\ModelBase;
 
 /**
@@ -96,6 +98,10 @@ class Location extends ModelBase
 		//     'published' => 'Publié',
 		//     'archived' => 'Archivé',
 		// ],
+		'level' => [
+			'region' => 'Région',
+			'prefecture' => 'Préfecture',
+		],
 	];
 
 	public function parent(): BelongsTo

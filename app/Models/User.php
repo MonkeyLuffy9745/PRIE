@@ -67,6 +67,16 @@ class User extends AuthenticatableBase
     {
         return match ($this->profile) {
             'admin' => [['subject' => ['all'], 'action' => ['manage']]],
+            'agent' => [
+                ['subject' => ['incident'], 'action' => ['manage']],
+                ['subject' => ['location'], 'action' => ['read']],
+                ['subject' => ['user'], 'action' => ['read']],
+            ],
+            'ministry' => [
+                ['subject' => ['incident'], 'action' => ['menu', 'read', 'historical', 'delete']],
+                ['subject' => ['location'], 'action' => ['manage']],
+                ['subject' => ['user'], 'action' => ['manage']],
+            ],
             default => [],
         };
     }

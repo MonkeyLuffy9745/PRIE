@@ -367,9 +367,7 @@ const onSubmit = () => {
           for (const key in res.errors) {
             if (res.errors[key]) {
               snackbarMessage.value += `${res.errors[key]}`
-              // res.errors[key].forEach(message => {
-              //   snackbarMessage.value += `${key}: ${message}<br>`
-              // })
+              
             }
           }
           snackbarCollor.value = "error"

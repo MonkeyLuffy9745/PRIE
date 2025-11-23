@@ -3,7 +3,7 @@
 definePage({
   meta: {
     action: 'update',
-    subject: 'user',
+    subject: 'location',
   },
 })
 
@@ -11,23 +11,23 @@ import FieldRenderer from '@/components/dialogs/FieldRenderer.vue'
 import { nextTick, reactive, ref } from 'vue'
 
 const router = useRouter()
-const route = useRoute("user-edit-id")
+const route = useRoute("location-edit-id")
 
 const currentItemFech = reactive({
   api: {
-    endPoint: 'user',
-    itemName: 'User',
+    endPoint: 'location',
+    itemName: 'Location',
     query: {  },
   },
 })
 
 const viewData = reactive({
-  name: 'Utilisateurs',
-  backName: 'un',
-  secondBackName: 'le',
+  name: 'Localisation',
+  backName: 'une',
+  secondBackName: 'la',
   backRoute: {
-    name: 'Utilisateurs',
-    endPoint: 'user',
+    name: 'Localisation',
+    endPoint: 'location',
   },
   api: {
     isLoading: false,
@@ -44,10 +44,10 @@ const currentItem = ref(currentItemData.value.data[currentItemFech.api.itemName]
 
 const functionData = {
   api: {
-    endpoint: 'user',
+    endpoint: 'location',
     method: 'PUT',
   },
-  backRouteName: 'user',
+  backRouteName: 'location',
 }
 
 function resetErrors() {
@@ -57,50 +57,23 @@ function resetErrors() {
 }
 
 const fieldDataList = reactive([
-  {
+{
     type: 'text',
     label: 'Nom',
-    value_key: 'first_name',
+    value_key: 'name',
     default_value: 'TEST',
     errors: null,
     required: true,
-    cols: { cols: 12, sm: 6, md: 6, lg: 6 },
-  },
-  {
-    type: 'text',
-    label: 'Prénom',
-    value_key: 'last_name',
-    default_value: 'TEST',
-    errors: null,
-    required: true,
-    cols: { cols: 12, sm: 6, md: 6, lg: 6 },
-  },
-  {
-    type: 'text',
-    label: 'Email',
-    default_value: 'TEST@gmail.com',
-    value_key: 'email',
-    errors: null,
-    required: true,
-    cols: { cols: 12, sm: 6, md: 6, lg: 6 },
-  },
-  {
-    type: 'text',
-    label: 'Téléphone',
-    value_key: 'mobile',
-    default_value: '91611135',
-    errors: null,
-    required: true,
-    cols: { cols: 12, sm: 6, md: 6, lg: 6 },
+    cols: { cols: 12, sm: 12, md: 12, lg: 12 },
   },
   {
     type: 'lov',
-    label: 'Profil',
-    value_key: 'profile',
+    label: 'Niveau',
+    value_key: 'level',
     errors: null,
     required: true,
-    default_value: 'test',
-    cols: { cols: 12, sm: 6, md: 6, lg: 6 },
+    default_value: 'region',
+    cols: { cols: 12, sm: 12, md: 12, lg: 12 },
     data: {
       list: {
         id: 'id',
@@ -112,19 +85,35 @@ const fieldDataList = reactive([
           execute: null,
           data: null,
         },
-        items: [{ id: 'admin', name: 'Administrateur' }, { id: 'agent', name: 'Agent' }, { id: 'ministry', name: 'Ministère' }],
+        items: [{ id: 'region', name: 'Région' }, { id: 'prefecture', name: 'Préfecture' }],
         multiple: false,
       },
     },
   },
   {
-    type: 'text',
-    label: 'Mot de passe',
-    value_key: 'password',
+    type: 'lov',
+    label: 'Parent',
+    value_key: 'parent_id',
     errors: null,
     required: false,
-    default_value: 'testtest',
-    cols: { cols: 12, sm: 6, md: 6, lg: 6 },
+    default_value: null,
+    clearable: true,
+    cols: { cols: 12, sm: 12, md: 12, lg: 12 },
+    data: {
+      list: {
+        id: 'id',
+        name: 'name',
+        source: 'api',
+        api: {
+          endpoint: 'location',
+          query: {},
+          execute: null,
+          data: null,
+        },
+        items: [],
+        multiple: false,
+      },
+    },
   },
 ])
 
@@ -148,8 +137,8 @@ for (let index = 0; index < fieldDataList.length; index++) {
 }
 
 // Normaliser la valeur initiale des utilisateurs pour VAutocomplete (tableau d'IDs)
-if (currentItem.value && Array.isArray(currentItem.value.users)) {
-  currentItem.value.users = currentItem.value.users.map(user => typeof user === 'object' && user !== null ? user.id : user)
+if (currentItem.value && Array.isArray(currentItem.value.locations)) {
+  currentItem.value.locations = currentItem.value.locations.map(location => typeof location === 'object' && location !== null ? location.id : location)
 }
 
 const refForm = ref()
@@ -180,6 +169,7 @@ const onSubmit = () => {
         for (const key in res.errors) {
           if (res.errors[key]) {
             snackbarMessage.value += `${res.errors[key]}`
+
             // res.errors[key].forEach(message => {
             //   snackbarMessage.value += `${key}: ${message}<br>`
             // })

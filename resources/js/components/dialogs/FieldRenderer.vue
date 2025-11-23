@@ -137,8 +137,8 @@ const finalValidationRules = computed(() => {
         :error-messages="field.errors"
         :label="field.label"
         :config="{
-          dateFormat: 'd/m/Y',
-          locale: French,
+          dateFormat: 'Y-m-d',
+          // locale: French,
         }"
         :rules="finalValidationRules"
       />
@@ -154,6 +154,7 @@ const finalValidationRules = computed(() => {
         :item-value="field.data.list.id ?? 'id'"
         :label="field.label"
         :rules="finalValidationRules"
+        :clearable="field.clearable ?? false"
         :multiple="field.data.list.multiple ?? false"
       />
     </div>

@@ -475,25 +475,25 @@ watchEffect(async () => {
 
 <style lang="scss" scoped>
 .custom-loader {
-	display: flex;
-	animation: loader 1s infinite;
+  display: flex;
+  animation: loader 1s infinite;
 }
 
 @keyframes loader {
-	from {
-		transform: rotate(0);
-	}
+  from {
+    transform: rotate(0);
+  }
 
-	to {
-		transform: rotate(360deg);
-	}
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .full-width-icon {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	block-size: 100%;
-	inline-size: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  block-size: 100%;
+  inline-size: 100%;
 }
 </style>
