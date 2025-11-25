@@ -71,17 +71,35 @@ class IncidentController extends APIController
         // Charger les relations nécessaires
         $model->load('location', 'user');
 
-        // Chemin du template Word
-        // $templatePath = app_path('Template/Incident.docx');
-        $templatePath = '../Document/Incident.docx';
+        // Chemin du template Word - utiliser un chemin absolu
+        $templatePath = base_path('Document/Incident.docx');
+
+        // Vérifier que le fichier existe
         if (! file_exists($templatePath)) {
-            return $this->responseError(['message' => 'Template Word non trouvé'], 404);
+            return $this->responseError(['message' => ['Template Word non trouvé à: '.$templatePath]], 404);
+        }
+
+        // Vérifier que le fichier est lisible
+        if (! is_readable($templatePath)) {
+            return $this->responseError(['message' => ['Template Word non lisible. Vérifiez les permissions du fichier.'.$templatePath]], 403);
         }
 
         try {
+            // Vérifier que le fichier est bien un fichier Word valide
+            $mimeType = mime_content_type($templatePath);
+            if (! in_array($mimeType, [
+                'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                'application/zip',
+                'application/x-zip-compressed',
+            ])) {
+                return $this->responseError([
+                    'message' => ['Le fichier template n\'est pas un fichier Word valide. Type détecté: '.$mimeType],
+                ], 400);
+            }
+
             // Créer le TemplateProcessor avec le template
             $templateProcessor = new TemplateProcessor($templatePath);
-            dd('damso');
+
             // Remplir les variables du template avec les données de l'incident
             $templateProcessor->setValue('id', $id);
             $templateProcessor->setValue('title', $model->title ?? 'N/A');
@@ -95,11 +113,11 @@ class IncidentController extends APIController
             $templateProcessor->setValue('user_name', $model->user->full_name ?? 'N/A');
 
             // Créer un répertoire temporaire pour les fichiers
-            $tempDir = storage_path('app/temp');
+            $tempDir = storage_path('app/tmp');
             if (! is_dir($tempDir)) {
                 mkdir($tempDir, 0755, true);
             }
-            dd($tempDir);
+
             // Générer un nom de fichier unique
             $wordFileName = 'incident-'.$id.'-'.time().'.docx';
             $pdfFileName = 'incident-'.$id.'-'.time().'.pdf';
@@ -140,8 +158,21 @@ class IncidentController extends APIController
             return response($pdfContent, 200)
                 ->header('Content-Type', 'application/pdf')
                 ->header('Content-Disposition', 'attachment; filename="incident-'.$id.'.pdf"');
+        } catch (\PhpOffice\PhpWord\Exception\Exception $e) {
+            // Erreur spécifique à PHPWord (fichier corrompu, format invalide, etc.)
+            return $this->responseError([
+                'message' => 'Erreur lors du traitement du template Word: '.$e->getMessage(),
+                'template_path' => $templatePath,
+                'error_type' => 'PHPWord Exception',
+            ], 500);
         } catch (\Exception $e) {
-            return $this->responseError(['message' => 'Erreur lors de la génération du PDF: '.$e->getMessage()], 500);
+            // Autres erreurs
+            return $this->responseError([
+                'message' => 'Erreur lors de la génération du PDF: '.$e->getMessage(),
+                'template_path' => $templatePath,
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+            ], 500);
         }
     }
 
