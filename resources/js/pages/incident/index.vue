@@ -223,6 +223,45 @@ const apiDelete = async id => {
   }
 }
 
+const downloadPdf = async id => {
+  const loadingId = `pdf-${id}`
+  loadings.value[loadingId] = true
+  try {
+    const response = await fetch(`${import.meta.env.VITE_API_BASE_URL || '/api'}/pdf/${viewData.data.api.endPoint}/${id}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${useCookie('accessToken').value}`,
+        'Accept': 'application/pdf',
+      },
+    })
+
+    if (!response.ok) {
+      throw new Error('Erreur lors du téléchargement du PDF')
+    }
+
+    const blob = await response.blob()
+    const url = window.URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `incident-${id}.pdf`
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    window.URL.revokeObjectURL(url)
+
+    isSnackbarScrollReverseVisible.value = true
+    snackbarColor.value = "success"
+    snackbarMessage.value = "Rapport PDF téléchargé avec succès"
+  } catch (error) {
+    snackbarColor.value = "error"
+    isSnackbarScrollReverseVisible.value = true
+    snackbarMessage.value = "Erreur lors du téléchargement du PDF"
+    console.error('Erreur lors du téléchargement:', error)
+  } finally {
+    loadings.value[loadingId] = false
+  }
+}
+
 // Lifecycle hooks et watchers
 onMounted(() => {
   fetchItemList([4])
@@ -345,6 +384,26 @@ watchEffect(async () => {
                 </VTooltip>
                 <VIcon icon="tabler-eye" />
               </IconBtn>
+
+
+              <IconBtn
+                v-if="$can('download', 'incident')"
+                :loading="loadings[`pdf-${item.id}`]"
+                :disabled="loadings[`pdf-${item.id}`]"
+                @click="downloadPdf(item.id)"
+              >
+                <VTooltip
+                  activator="parent"
+                  transition="scroll-x-transition"
+                  location="top"
+                >
+                  Télécharger
+                </VTooltip>
+                <VIcon icon="tabler-download" />
+              </IconBtn>
+
+
+
               <IconBtn
                 v-if="$can('edit', 'incident')"
                 :to="{

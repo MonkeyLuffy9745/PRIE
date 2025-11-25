@@ -21,12 +21,12 @@ class User extends AuthenticatableBase
         'profile',
     ];
 
-
     protected $appends = [
         'ability_rules',
         'full_name',
         'profile_fr',
     ];
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -38,8 +38,9 @@ class User extends AuthenticatableBase
     ];
 
     protected $enumCasts = [
-        'profile' => ['admin' => 'Administrateur', 'agent' => 'Agent', 'ministry' => 'Ministère']
+        'profile' => ['admin' => 'Administrateur', 'agent' => 'Agent', 'ministry' => 'Ministère'],
     ];
+
     /**
      * Get the attributes that should be cast.
      *
@@ -53,7 +54,6 @@ class User extends AuthenticatableBase
         ];
     }
 
-
     /**
      * Get the incidents created by this user.
      */
@@ -61,7 +61,6 @@ class User extends AuthenticatableBase
     {
         return $this->hasMany(Incident::class, 'user_id');
     }
-
 
     public function getAbilityRulesAttribute(): array
     {
@@ -73,7 +72,7 @@ class User extends AuthenticatableBase
                 ['subject' => ['user'], 'action' => ['read']],
             ],
             'ministry' => [
-                ['subject' => ['incident'], 'action' => ['menu', 'read', 'historical', 'delete']],
+                ['subject' => ['incident'], 'action' => ['menu', 'read', 'historical', 'delete', 'download']],
                 ['subject' => ['location'], 'action' => ['manage']],
                 ['subject' => ['user'], 'action' => ['manage']],
             ],
@@ -95,5 +94,4 @@ class User extends AuthenticatableBase
             default => 'Inconnue',
         };
     }
-
 }
