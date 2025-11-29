@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Illuminate\Http\Request;
 use Maravel\Http\Controllers\APIController;
+use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\TemplateProcessor;
 
 /**
@@ -127,7 +130,7 @@ class IncidentController extends APIController
             // Sauvegarder le document Word généré
             $templateProcessor->saveAs($wordPath);
 
-            // Convertir le Word en PDF en utilisant LibreOffice
+            // Convertir le Word en PDF en utilisant PHP (PHPWord + DomPDF)
             $conversionSuccess = false;
             try {
                 $conversionSuccess = $this->convertWordToPdf($wordPath, $pdfPath);
@@ -177,82 +180,135 @@ class IncidentController extends APIController
     }
 
     /**
-     * Convertit un document Word en PDF en utilisant LibreOffice
+     * Convertit un document Word en PDF en utilisant PHPWord et DomPDF
      *
      * @param  string  $wordPath  Chemin du fichier Word
      * @param  string  $pdfPath  Chemin de sortie du PDF
      */
     private function convertWordToPdf(string $wordPath, string $pdfPath): bool
     {
-        // Vérifier si LibreOffice est installé
-        $libreOfficePath = $this->findLibreOffice();
+        try {
+            // Charger le document Word
+            $phpWord = IOFactory::load($wordPath);
 
-        if (! $libreOfficePath) {
-            \Log::warning('LibreOffice n\'est pas installé. Impossible de convertir Word en PDF.');
+            // Exporter le document Word en HTML
+            $htmlWriter = IOFactory::createWriter($phpWord, 'HTML');
+            $htmlPath = dirname($pdfPath).'/'.pathinfo($wordPath, PATHINFO_FILENAME).'.html';
+            $htmlWriter->save($htmlPath);
 
-            return false;
+            // Lire le contenu HTML
+            $htmlContent = file_get_contents($htmlPath);
+
+            // Nettoyer le HTML pour améliorer la compatibilité avec DomPDF
+            $htmlContent = $this->cleanHtmlForPdf($htmlContent);
+
+            // Configurer DomPDF
+            $options = new Options;
+            $options->set('isHtml5ParserEnabled', true);
+            $options->set('isRemoteEnabled', true);
+            $options->set('defaultFont', 'DejaVu Sans');
+            $options->set('isFontSubsettingEnabled', true);
+
+            // Créer l'instance DomPDF
+            $dompdf = new Dompdf($options);
+
+            // Charger le HTML dans DomPDF
+            $dompdf->loadHtml($htmlContent, 'UTF-8');
+
+            // Définir le format de papier (A4 par défaut)
+            $dompdf->setPaper('A4', 'portrait');
+
+            // Rendre le PDF
+            $dompdf->render();
+
+            // Sauvegarder le PDF
+            $pdfOutput = $dompdf->output();
+            file_put_contents($pdfPath, $pdfOutput);
+
+            // Nettoyer le fichier HTML temporaire
+            @unlink($htmlPath);
+
+            return file_exists($pdfPath);
+        } catch (\Exception $e) {
+            \Log::error('Erreur lors de la conversion Word en PDF: '.$e->getMessage());
+            throw $e;
         }
-
-        // Commande pour convertir Word en PDF
-        $command = sprintf(
-            '%s --headless --convert-to pdf --outdir %s %s',
-            escapeshellarg($libreOfficePath),
-            escapeshellarg(dirname($pdfPath)),
-            escapeshellarg($wordPath)
-        );
-
-        // Exécuter la commande
-        exec($command.' 2>&1', $output, $returnCode);
-
-        // Le fichier PDF sera créé avec le même nom que le Word mais avec l'extension .pdf
-        $expectedPdfPath = dirname($pdfPath).'/'.pathinfo($wordPath, PATHINFO_FILENAME).'.pdf';
-
-        if (file_exists($expectedPdfPath)) {
-            // Renommer le fichier PDF si nécessaire
-            if ($expectedPdfPath !== $pdfPath) {
-                rename($expectedPdfPath, $pdfPath);
-            }
-
-            return true;
-        }
-
-        return false;
     }
 
     /**
-     * Trouve le chemin de LibreOffice
+     * Nettoie le HTML pour améliorer la compatibilité avec DomPDF
+     *
+     * @param  string  $html  Contenu HTML brut
+     * @return string HTML nettoyé
      */
-    private function findLibreOffice(): ?string
+    private function cleanHtmlForPdf(string $html): string
     {
-        $possiblePaths = [
-            '/usr/bin/libreoffice',
-            '/usr/local/bin/libreoffice',
-            '/opt/libreoffice*/program/soffice',
-            'soffice', // Si dans le PATH
-        ];
+        // Vérifier si le HTML contient déjà une structure complète
+        $hasHtmlTag = stripos($html, '<html') !== false;
+        $hasBodyTag = stripos($html, '<body') !== false;
 
-        foreach ($possiblePaths as $path) {
-            if ($path === 'soffice') {
-                // Vérifier si soffice est dans le PATH
-                exec('which soffice 2>&1', $output, $returnCode);
-                if ($returnCode === 0 && ! empty($output[0])) {
-                    return $output[0];
-                }
-            } else {
-                // Vérifier les chemins glob
-                $globPaths = glob($path);
-                if (! empty($globPaths) && is_executable($globPaths[0])) {
-                    return $globPaths[0];
-                }
-
-                // Vérifier le chemin exact
-                if (file_exists($path) && is_executable($path)) {
-                    return $path;
-                }
+        // Ajouter des styles CSS de base pour améliorer le rendu
+        $css = '
+        <style>
+            body {
+                font-family: DejaVu Sans, Arial, sans-serif;
+                font-size: 12pt;
+                line-height: 1.6;
+                margin: 20px;
             }
+            h1, h2, h3, h4, h5, h6 {
+                margin-top: 20px;
+                margin-bottom: 10px;
+                font-weight: bold;
+            }
+            h1 { font-size: 18pt; }
+            h2 { font-size: 16pt; }
+            h3 { font-size: 14pt; }
+            p {
+                margin: 10px 0;
+                text-align: justify;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 15px 0;
+            }
+            table td, table th {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+            table th {
+                background-color: #f2f2f2;
+                font-weight: bold;
+            }
+        </style>
+        ';
+
+        // Si le HTML est déjà complet, injecter le CSS dans le head
+        if ($hasHtmlTag && $hasBodyTag) {
+            // Injecter le CSS dans le head existant
+            if (stripos($html, '</head>') !== false) {
+                $html = str_ireplace('</head>', $css.'</head>', $html);
+            } elseif (stripos($html, '<body') !== false) {
+                // Si pas de head, ajouter le CSS avant le body
+                $html = str_ireplace('<body', $css.'<body', $html);
+            }
+        } else {
+            // Encapsuler le HTML dans une structure valide
+            $html = '<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    '.$css.'
+</head>
+<body>
+    '.$html.'
+</body>
+</html>';
         }
 
-        return null;
+        return $html;
     }
 
     /**
